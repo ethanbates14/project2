@@ -1,2 +1,3 @@
-# project2
-CSCI-S-33a Project 2 - Chatterbox
+# Project 2
+
+Web Programming with Python and JavaScript
