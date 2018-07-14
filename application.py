@@ -10,6 +10,10 @@ socketio = SocketIO(app)
 # list of all channels
 channel_list = ['general']
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return "Project 2: TODO"
+    if request.method == "POST":
+        note = request.form.get("note")
+        notes.append(note)
+
+    return render_template("index.html", title="Index" notes=notes)
