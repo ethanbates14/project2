@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template, request, session
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
@@ -13,7 +13,10 @@ channel_list = ['general']
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        note = request.form.get("note")
-        notes.append(note)
+        new_channel= request.form.get('channel')
+        if new_channel in channel_list:
+            return "ALREADY IN THERE"
+        else:
+            channel_list.append(new_channel)
 
-    return render_template("index.html", title="Index" notes=notes)
+    return render_template("index.html", title="Index", channels=channel_list)
