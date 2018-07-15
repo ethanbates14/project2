@@ -5,7 +5,7 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-socketio = SocketIO(app)
+#socketio = SocketIO(app)
 
 # list of all channels
 channel_list = ['general']
