@@ -1,6 +1,6 @@
 import os, json
 from flask import Flask, render_template, request, session
-from flask_socketio import SocketIO, emit, send
+from flask_socketio import SocketIO, emit, send, join_room
 
 
 app = Flask(__name__)
@@ -11,21 +11,28 @@ socketio = SocketIO(app)
 channel_list = ['one','two','three','five','six']
 user_messages = {}
 
+# Render Index Template
+@app.route("/", methods=["GET", "POST"])
+def index():
+    return render_template("index.html", channels=channel_list)
+
+#User Login and Display Name
+@app.route("/login", methods=['POST'])
+def login():
+    """Login Form"""
+    session['username'] = request.form['username']
+    return render_template("index.html")
+
+@app.route('/test')
+def test():
+    #session.clear()
+    return f"{session['username']}"
+
+
 @socketio.on('message')
 def handleMessage(msg):
     print('Message: ' + msg)
     send(msg, broadcast=True)
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "POST":
-        new_channel= request.form.get('channel')
-        if new_channel in channel_list:
-            return "ALREADY IN THERE"
-        else:
-            channel_list.append(new_channel)
-
-    return render_template("index.html", channels=channel_list)
-
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, debug=True)

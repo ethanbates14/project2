@@ -10,22 +10,42 @@
    </head>
    <body>
       {% block body %}
-      <!-- Channel Side Bar -->
+
       <div class="container-fluid">
+         <h1 id="titlemain" class="text-center">ChatterBox</h1>
          <div class="row">
-            <div id="channelbar" class="col-sm-2">
-               <h3>Channel List</h3>
-               <form action="{{ url_for('index') }}" method="post">
-                  <input type="text" name="channel" autocomplete="off" placeholder="Enter Channel Here">
-                  <button>Add a New Channel</button>
-               </form>
-               <ul class="list-group">
-                  {% for ch_item in channels %}
-                  <li class="channel-items list-group-item">{{ ch_item }}</li>
-                  {% endfor %}
-               </ul>
-            </div>
-            <div id="messagearea" class="col-sm-6">
+         <!-- Channel Side Bar -->
+            <div id="channelbar" class="col-sm-3">
+               <div class="row">
+                  <div class="col-auto">
+                     <h1 id="greeting">WELCOME</h1>
+                     <div id="choosename">
+                        <input id="username" type="text" name="username" autocomplete="off" placeholder="UserName">
+                        <input id="senduser" type="submit">
+                     </div>
+                  </div>
+               </div>
+
+
+               <div class="row">
+                  <div class="col-auto">
+                     <h1>Channel List</h1>
+                     <form action="/" method="post">
+                        <input type="text" name="channel" autocomplete="off" placeholder="Enter Channel Here">
+                        <button>Add a New Channel</button>
+                     </form>
+                     <ul class="list-group">
+                        {% for ch_item in channels %}
+                        <li class="channel-items list-group-item">{{ ch_item }}</li>
+                        {% endfor %}
+                     </ul>
+                  </div>
+               </div>
+            </div> <!-- channelbar -->
+
+
+            <!-- Messaging Area -->
+            <div id="messagearea" class="col-sm-8">
                 <div class="row">
                   <div class="col-auto">
                      <h1 id="selected_channel" class="display-4">#</h1>
