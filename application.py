@@ -19,13 +19,11 @@ def index():
 #Adding Channels
 @socketio.on('add_new_channel')
 def add_new_channel(chjson):
-    print('received chjson: {0}'.format(str(chjson)))
     new_channel= chjson['name']
     if new_channel in channel_list:
-        print("Already Exists")
+        emit('my_response',{'data': 'Channel Already Exists'})
     else:
         channel_list.append(new_channel)
-        send(channel_list, broadcast=True)
 
 #User Login and Display Name
 @app.route("/login", methods=['POST'])
