@@ -8,13 +8,24 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
 # list of all channels
-channel_list = ['one','two','three','five','six']
+channel_list = ['one','two','three']
 user_messages = {}
 
 # Render Index Template
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template("index.html", channels=channel_list)
+
+#Adding Channels
+@socketio.on('add_new_channel')
+def add_new_channel(chjson):
+    print('received chjson: {0}'.format(str(chjson)))
+    new_channel= chjson['name']
+    if new_channel in channel_list:
+        print("Already Exists")
+    else:
+        channel_list.append(new_channel)
+        send(channel_list, broadcast=True)
 
 #User Login and Display Name
 @app.route("/login", methods=['POST'])

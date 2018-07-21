@@ -15,6 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#choosename').style.display = "none";
 
   };
+  // Add Channels
+  document.querySelector('#addchannel').onsubmit = function() {
+    const chName = document.forms["addchannel"]["channel"].value;
+    console.log(chName);
+    socket.emit('add_new_channel', {'name': chName});
+  };
+
 
   // Channel Selection
   document.querySelectorAll('.channel-items').forEach(function(ch) {
