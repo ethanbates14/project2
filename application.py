@@ -21,22 +21,12 @@ def index():
 def add_new_channel(chjson):
     new_channel= chjson['name']
     if new_channel in channel_list:
-        emit('my_response',{'data': 'Channel Already Exists'})
+        emit('channel_alert',{'data': 'Channel Already Exists!'})
     else:
         channel_list.append(new_channel)
+        emit('display_channel',new_channel, broadcast=True)
 
 #User Login and Display Name
-@app.route("/login", methods=['POST'])
-def login():
-    """Login Form"""
-    session['username'] = request.form['username']
-    return render_template("index.html")
-
-@app.route('/test')
-def test():
-    #session.clear()
-    return f"{session['username']}"
-
 
 @socketio.on('message')
 def handleMessage(msg):
