@@ -1,26 +1,68 @@
 #titlemain {
     font-family: 'Lobster', cursive;
-    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 500%;
+    color:white;
+}
+
+.greeting {
+    font-family: 'Lobster', cursive;
+    margin-bottom: 20px;
+    font-size: 250%;
+}
+
+#selected_channel {
+    font-size: 250%;
+    margin-top: 10px;
+    margin-left: 10px;
+    color: white;
+}
+.row {
+    margin: 5px;
+    border: solid;
+    border-width:thin;
+    border-radius: 3px;
+    margin-left
+}
+
+body, div.container-fluid {
+  background-color: #606169  
+}
+
+#choosename {
     margin-bottom: 20px;
 }
 
-
-.row {
-    border:solid;
-}
-
-.channel-items {
-    color:red;
-
-}
-
 #channelbar {
+    background-color:#3B3E4D;
+    color:white;
+}
+
+#channelbar li {
+    background-color:#808090;
+    padding: 8px;
+}
+
+#channelbar div.row {
+    margin-bottom: 30px;
+}
+
+#addchannel {
+    margin-bottom: 10px;
+}
+
+#messagechat {
+    margin-bottom: 10px;
+    padding: 15px;
     border: solid;
-    border-color:green;
+    border-width: thin;
+    border-radius: 8px;
 }
 
-#messagearea {
-    border: dotted;
-    border-color:red;
+.message-display {
+    background-color: white;
 }
 
+#messages {
+    height: 500px;
+}
