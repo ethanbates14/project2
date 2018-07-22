@@ -22,11 +22,10 @@
     border: solid;
     border-width:thin;
     border-radius: 3px;
-    margin-left
 }
 
-body, div.container-fluid {
-  background-color: #606169  
+body, .container-fluid {
+  background-color: #606169
 }
 
 #choosename {
@@ -51,6 +50,16 @@ body, div.container-fluid {
     margin-bottom: 10px;
 }
 
+.alert-danger {
+    margin-top: 5px;
+    padding: 8px;
+}
+
+.close {
+    padding-top: 5px !important;
+    padding-right: 10px !important;
+}
+
 #messagechat {
     margin-bottom: 10px;
     padding: 15px;
@@ -64,5 +73,25 @@ body, div.container-fluid {
 }
 
 #messages {
-    height: 500px;
+    list-style: none;
+    padding-left:10px;
+}
+
+.msg_username {
+    font-weight: bold;
+    font-size: 24px;
+    font-family: 'Lobster', cursive;
+    font-style: italic;
+    padding-right: 5px;
+}
+
+.msg_timestamp {
+    padding-right: 5px;
+    font-size: 10px;
+    font-style: italic;
+    color: gray;
+}
+
+.msg_user_content {
+    margin-bottom: 5px;
 }

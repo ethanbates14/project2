@@ -7,7 +7,7 @@
        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!-- CSS --> 
+    <!-- CSS -->
        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -20,23 +20,16 @@
       <div class="container-fluid">
          <h1 id="titlemain" class="text-center">ChatterBox</h1>
          <div class="row">
-             
+
             <!-- Channel Side Bar -->
             <div id="channelbar" class="col-sm-3">
-                
+
                <!-- User Display Name -->
                <div class="row">
                   <div class="col-sm-12">
-                     <h1 class="greeting">Welcome</h1>
+                     <h1 id="welcome_user" class="greeting">Welcome </h1>
                      <form id="choosename">
-                        <div class="input-group">
-                           <input id="usernameInput" type="text" class="form-control" name="username" autocomplete="off" placeholder="UserName">
-                           <span class="input-group-btn">
-                           <button class="btn btn-default" type="button">
-                           <i class="fas fa-plus-circle"></i>
-                           </button>
-                           </span>
-                        </div> <!-- /input-group -->
+                        <input id="usernameInput" type="text" class="form-control" name="username" autocomplete="off" placeholder="Display Name" required>
                      </form>
                   </div>
                </div>
@@ -45,24 +38,17 @@
                   <div class="col-sm-12">
                      <h1 class="greeting">Channel List</h1>
                      <form id="addchannel">
-                        <div class="input-group">
-                           <input type="text" class="form-control" name="channel" autocomplete="off" placeholder="Add New Channel">
-                           <span class="input-group-btn">
-                           <button class="btn btn-default" type="button">
-                           <i class="fas fa-plus-circle"></i>
-                           </button>
-                           </span>
-                        </div> <!-- .input-group -->
+                        <input type="text" class="form-control" name="channel" autocomplete="off" placeholder="Add New Channel">
                      </form>
                      <ul class="list-group">
                         {% for ch_item in channels %}
-                        <li class="channel-items list-group-item" onclick="selectChannel()">{{ ch_item }}</li>
+                        <li class="channel-items list-group-item">{{ ch_item }}</li>
                         {% endfor %}
                      </ul>
                   </div>
                </div>
             </div>  <!-- #channelbar -->
-             
+
             <!-- Messaging Area -->
             <div id="messagearea" class="col-sm-9">
                <div class="row">
@@ -74,13 +60,12 @@
                <div class="row">
                   <div class="col-sm-12 message-display">
                      <ul id="messages">
-                         <li>hello</li>
                       </ul>
                      <form id="messagechat">
                         <div class="form-row align-items-center">
                            <div class="col-sm-11">
-                              <label class="sr-only" for="inlineFormInputName">Name</label>
-                              <input id="myMessage" type="text" class="form-control"  autocomplete="off" placeholder="Message">
+                              <label class="sr-only" for="inlineFormInputName">Message</label>
+                              <input id="myMessage" type="text" class="form-control"  autocomplete="off" placeholder="Message" disabled>
                            </div>
                            <div class="col-auto">
                               <button id="sendbutton" type="submit" class="btn btn-primary">Send</button>
