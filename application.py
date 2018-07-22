@@ -28,6 +28,16 @@ def add_new_channel(chjson):
 
 #User Login and Display Name
 
+
+
+
+#Room Control
+@socketio.on('my_room_event')
+def send_room_message(message):
+    emit('my_response',{'data': message['data']} ,room=message['room'])
+
+
+#Messaging
 @socketio.on('message')
 def handleMessage(msg):
     print('Message: ' + msg)

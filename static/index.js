@@ -4,6 +4,7 @@
   // Connect to websocket
   socket.on('connect', function() {
     console.log('Websocket connected!');
+    console.log(socket.id);
   });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -36,8 +37,24 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("Received" + newChannel)
   });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // Messages
-    document.querySelector('#sendbutton').onclick = function() {
+  document.querySelector('#sendbutton').onclick = function() {
     var msgcontent = document.querySelector('#myMessage').value;
     console.log(msgcontent);
     socket.send(msgcontent);
