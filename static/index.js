@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   // Message Send
-  document.querySelector('#sendbutton').onclick = function() {
+  document.querySelector('#general-sendbutton').onclick = function() {
     var msgcontent = document.querySelector('#general-myMessage').value;
     var timestamp = timestamp_format()
     console.log(msgcontent);

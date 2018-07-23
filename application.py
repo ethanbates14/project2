@@ -8,12 +8,18 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
 # list of channels and messages per channel.  Default is General
+channel_list = ['general']
+channel_messages = {'general': [{'msg_user': 'Ethan', 'msg_message': 'Hello', 'msg_time': '7/22/2018 8:37 PM'}]}
+"""
+#Testing
+
 channel_list = ['general','one','two']
 channel_messages = {
     'general': [{'msg_user': 'Ethan', 'msg_message': 'Hello', 'msg_time': '7/22/2018 8:37 PM'}] ,
     'one': [{'msg_user': 'Bob', 'msg_message': 'There', 'msg_time': '7/22/2018 8:37 PM'}] ,
     'two': [{'msg_user': 'Tom', 'msg_message': 'You', 'msg_time': '7/22/2018 8:37 PM'}] ,
 }
+"""
 
 # Render Index Template
 @app.route("/", methods=["GET", "POST"])
