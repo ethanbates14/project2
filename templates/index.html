@@ -51,21 +51,34 @@
 
             <!-- Messaging Area -->
             <div id="messagearea" class="col-sm-9">
+
+             <!-- channel iteration -->
+            {% for ch_item in channels %}
+            <div id="{{ch_item}}" class="row">
+               <div class="col-sm-12">
+
                <div class="row">
                   <div class="col-auto">
-                     <h1 id="selected_channel" class="greeting">#General</h1>
+                     <h1 class="selected_channel greeting">#{{ ch_item }}</h1>
                   </div>
                </div>
                <br>
                <div class="row">
                   <div class="col-sm-12 message-display">
-                     <ul id="messages">
+                     <ul id="{{ch_item}}-messages" class="list-messages">
+                           {% for msg in ch_messages[ch_item] %}
+                              <li>
+                                 <span class="msg_username">{{ msg.msg_user }}</span>
+                                 <span class="msg_timestamp">{{ msg.msg_time }}</span>
+                                 <p class="msg_user_content">{{ msg.msg_message }}</p>
+                              </li>
+                           {% endfor %}
                       </ul>
-                     <form id="messagechat">
+                     <form class="messagechat">
                         <div class="form-row align-items-center">
                            <div class="col-sm-11">
                               <label class="sr-only" for="inlineFormInputName">Message</label>
-                              <input id="myMessage" type="text" class="form-control"  autocomplete="off" placeholder="Message" disabled>
+                              <input id="{{ch_item}}-myMessage" type="text" class="form-control"  autocomplete="off" placeholder="Message" disabled>
                            </div>
                            <div class="col-auto">
                               <button id="sendbutton" type="submit" class="btn btn-primary">Send</button>
@@ -74,7 +87,12 @@
                      </form>
                   </div>
                </div>
-            </div>
+
+               </div>
+            </div> <!-- {{ch_item}} -->
+            {% endfor %}
+
+            </div> <!-- messagearea -->
          </div> <!-- main row -->
       </div> <!-- main container-->
        {% endblock %}

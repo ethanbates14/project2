@@ -3,13 +3,14 @@
   var socket_info = {
     'session_id': '',
     'display_name': '',
-    'room_name': ''
+    'channel_name': ''
   }
 
   // Connect to websocket
   socket.on('connect', function() {
     console.log('Websocket connected!');
     socket_info['session_id'] = socket.id ;
+    socket_info['channel_name'] = 'general' ;
   });
 
   // Timestamp Format
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Hide User Input Form and Set Message Center to Enabled
     document.getElementById('choosename').style.display = 'none';
-    document.getElementById('myMessage').disabled = false;
+    document.getElementById('general-myMessage').disabled = false;
 
     return false;
   };
@@ -90,18 +91,19 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("Received" + newChannel)
   });
 
-
-
+  // Channel Selection
 
 
 
   // Message Send
   document.querySelector('#sendbutton').onclick = function() {
-    var msgcontent = document.querySelector('#myMessage').value;
+    var msgcontent = document.querySelector('#general-myMessage').value;
     var timestamp = timestamp_format()
     console.log(msgcontent);
     socket.emit('user_messages',
         {'user': socket_info['display_name'], 'msgcontent': msgcontent, 'timestamp': timestamp, 'room': 'general' });
+
+    document.querySelector('#general-myMessage').value = '';
     return false;
   };
 
@@ -113,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var userMsg = document.createElement('p');
 
     //UserName
-    userWrap.innerHTML = msg['msg_user'] + ': ';
+    userWrap.innerHTML = msg['msg_user'];
     userWrap.setAttribute("class","msg_username");
 
     //Timestamp
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
     newMessage.appendChild(userTimeStmp);
     newMessage.appendChild(userMsg);
 
-    document.querySelector("#messages").appendChild(newMessage);
+    document.getElementById("general-messages").appendChild(newMessage);
     console.log("Received " + socket_info['display_name'] + msg);
   });
 

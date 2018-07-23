@@ -11,7 +11,7 @@
     font-size: 250%;
 }
 
-#selected_channel {
+.selected_channel {
     font-size: 250%;
     margin-top: 10px;
     margin-left: 10px;
@@ -60,7 +60,7 @@ body, .container-fluid {
     padding-right: 10px !important;
 }
 
-#messagechat {
+.messagechat {
     margin-bottom: 10px;
     padding: 15px;
     border: solid;
@@ -68,13 +68,13 @@ body, .container-fluid {
     border-radius: 8px;
 }
 
-.message-display {
-    background-color: white;
-}
-
-#messages {
+.list-messages {
     list-style: none;
     padding-left:10px;
+}
+
+.message-display {
+    background-color: white;
 }
 
 .msg_username {
