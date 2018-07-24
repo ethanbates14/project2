@@ -53,11 +53,25 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  //Display Name
+  // Check Local Storage
+  var localUser = localStorage.getItem('display_name');
+  if(localUser) {
+    document.getElementById('choosename').style.display = 'none';
+    document.querySelectorAll('.message-input').forEach(function(mi) {
+      mi.disabled = false;
+      });
+    socket_info['display_name'] = localUser;
+    var welcomeBack = 'Hi ' + localUser;
+    document.getElementById('welcome_user').innerHTML = welcomeBack;
+
+  };
+
+  //Display Name Entry
   document.getElementById('choosename').onsubmit = function() {
     display_name = document.getElementById('usernameInput').value;
     socket_info['display_name'] = display_name;
-    console.log(socket_info);
+    localStorage.setItem('display_name',display_name);
+    console.log(localStorage.getItem('display_name'));
 
     var userWelcome = document.getElementById('welcome_user').innerHTML
     userWelcome = 'Welcome ' + display_name;
@@ -78,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add Channels
   document.querySelector('#addchannel').onsubmit = function() {
     const chName = document.forms["addchannel"]["channel"].value.trim();
-    console.log(chName);
+    //console.log(chName);
     socket.emit('add_new_channel', {'name': chName});
     document.forms["addchannel"]["channel"].value = '';
     return false
@@ -86,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Alert if Channel Already Exists
   socket.on('channel_alert', function(msg) {
-    console.log(msg);
+    //console.log(msg);
 
     var chAlert = document.createElement('div');
     chAlert.innerHTML = msg['data'];
@@ -118,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
     newChannel.setAttribute("id","list-" + channel + "-list");
     newChannel.onclick = switchChannel;
     document.querySelector(".list-group").appendChild(newChannel);
-    console.log("Received" + newChannel)
+    //console.log("Received" + newChannel)
   });
 
   // Channel Selection
@@ -143,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById(myChat).classList.remove('hide-item');
       this.classList.add("active-channel");
       socket_info['channel_name'] = roomName;
-      console.log('Room:' + socket_info['channel_name']);
+      //console.log('Room:' + socket_info['channel_name']);
 
     };
   });
@@ -153,10 +167,10 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.sendbutton').forEach(function(btn) {
     btn.onclick = function() {
       var msgElem = '#' + socket_info['channel_name'] + '-' + 'myMessage';
-      console.log(msgElem)
+
       var msgcontent = document.querySelector(msgElem).value;
       var timestamp = timestamp_format()
-      console.log(msgcontent);
+
       socket.emit('user_messages',
           {'user': socket_info['display_name'], 'msgcontent': msgcontent, 'timestamp': timestamp, 'room': socket_info['channel_name'] });
 
@@ -192,9 +206,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById(listmsg).appendChild(newMessage);
     gotoBottom(listmsg);
+
+    /* Test Logging
     console.log("Received " + msg['msg_user'] + ' ' + msg['msg_message'] + ' ' + msg['room']);
     console.log("Appending " + newMessage);
     console.log("To " + listmsg);
+    */
 
 
   });

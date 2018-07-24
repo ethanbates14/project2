@@ -1,6 +1,7 @@
 import os, json
 from flask import Flask, render_template, request, session
 from flask_socketio import SocketIO, emit, send, join_room
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -8,18 +9,13 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
 # list of channels and messages per channel.  Default is General
-channel_list = ['general']
-channel_messages = {'general': [{'msg_user': 'Chatterbox', 'msg_message': 'Hello There!', 'msg_time': '7/22/2018 8:37 PM'}]}
-"""
-#Testing
-
-channel_list = ['general','one','two']
+startTime = '[' + datetime.now().strftime('%Y/%m/%d') + ']'
+channel_list = ['general','social']
 channel_messages = {
-    'general': [{'msg_user': 'Ethan', 'msg_message': 'Hello', 'msg_time': '7/22/2018 8:37 PM'}] ,
-    'one': [{'msg_user': 'Bob', 'msg_message': 'There', 'msg_time': '7/22/2018 8:37 PM'}] ,
-    'two': [{'msg_user': 'Tom', 'msg_message': 'You', 'msg_time': '7/22/2018 8:37 PM'}] ,
+    'general': [{'msg_user': 'Chatterbox', 'msg_message': 'Hello There!', 'msg_time': startTime}],
+    'social': [{'msg_user': 'Chatterbox', 'msg_message': 'Hi!', 'msg_time': startTime}]
 }
-"""
+
 #Push Out Oldest Message Per Channel - Max 100 msg
 def max_messages(array):
     msg_count = len(array)
@@ -55,7 +51,7 @@ def handle_usr_message(message):
 
     #Check if Key Exists and Message Count, Add Mesage to Dict of Rooms
     max_messages(message['room'])
-    #room_exists(message['room'],channel_messages)
+    room_exists(message['room'],channel_messages)
     channel_messages[message['room']].append({'msg_user': message['user'], 'msg_message': message['msgcontent'], 'msg_time': message['timestamp'] })
 
     print(channel_messages)

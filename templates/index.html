@@ -38,7 +38,11 @@
                   <div class="col-sm-12">
                      <h1 class="greeting">Channel List</h1>
                      <form id="addchannel">
-                        <input type="text" class="form-control" name="channel" autocomplete="off" placeholder="Add New Channel">
+                        <input type="text" name="channel"
+                           class="form-control"
+                           autocomplete="off" placeholder="Add New Channel"
+                           pattern="[a-z][A-Z]{1,15}"  title="Supports [A-Z], Max 15 Characters"
+                           required>
                      </form>
                      <ul class="list-group">
                         {% for ch_item in channels %}
