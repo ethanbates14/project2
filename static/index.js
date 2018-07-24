@@ -83,17 +83,28 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Channel Display
-  socket.on('display_channel', (channel) => {
+  socket.on('display_channel', function(channel) {
     var newChannel = document.createElement('li');
     newChannel.innerHTML = channel;
     newChannel.setAttribute("class","channel-items list-group-item");
+    newChannel.setAttribute("id","list-" + channel + "-list");
     document.querySelector(".list-group").appendChild(newChannel);
     console.log("Received" + newChannel)
   });
 
   // Channel Selection
+  document.querySelectorAll('.channel-items').forEach(function(item) {
+    item.onclick = function() {
+      document.querySelectorAll('.channel-items').forEach(function(other) {
+        if (other.classList.contains('active-channel') ) {
+          other.classList.remove('active-channel');
+        };
+      });
+      var myselection = this.id;
+      this.classList.add("active-channel");
 
-
+    };
+  });
 
   // Message Send
   document.querySelector('#general-sendbutton').onclick = function() {

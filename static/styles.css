@@ -50,6 +50,12 @@ body, .container-fluid {
     margin-bottom: 10px;
 }
 
+.active-channel {
+    font-family: 'Lobster', cursive;
+    font-size: 24px;
+    background-color: #007BFF !important;
+}
+
 .alert-danger {
     margin-top: 5px;
     padding: 8px;
