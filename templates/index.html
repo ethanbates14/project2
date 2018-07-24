@@ -18,9 +18,43 @@
    <body>
       {% block body %}
       <div class="container-fluid">
-         <h1 id="titlemain" class="text-center">ChatterBox</h1>
-         <div class="row">
+         <div id="chat-header" class="row">
+            <div class="col-sm-1">
+               <!-- Button trigger modal -->
+               <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#helpModal">
+                  HELP
+               </button>
+               <!-- Help Modal -->
+               <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                           <h5 class="modal-title" id="helpModalLabel">ChatterBox Help</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                           </button>
+                        </div>
+                        <div class="modal-body">
+                           <span>Welcome to Chatterbox!</span>
+                           <ul>
+                              <li>Enter your username in <strong>Display Name</strong> to start chatting</li>
+                              <li>Select a Channel by clicking on one of the items under <strong>Channel List</strong></li>
+                              <li>Add new channels by typing in the <strong>Add New Channel</strong> Box</li>
+                           </ul>
+                       </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-11">
+               <h1 id="titlemain" class="text-center">ChatterBox</h1>
+            </div>
+         </div>
 
+         <div class="row"> <!-- main row -->
             <!-- Channel Side Bar -->
             <div id="channelbar" class="col-sm-3">
 
@@ -41,7 +75,7 @@
                         <input type="text" name="channel"
                            class="form-control"
                            autocomplete="off" placeholder="Add New Channel"
-                           pattern="[a-z][A-Z]{1,15}"  title="Supports [A-Z], Max 15 Characters"
+                           pattern="[a-z]{1,15}"  title="Supports [a-z], Max 15 Characters"
                            required>
                      </form>
                      <ul class="list-group">

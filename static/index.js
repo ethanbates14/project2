@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
     display_name = document.getElementById('usernameInput').value;
     socket_info['display_name'] = display_name;
     localStorage.setItem('display_name',display_name);
-    console.log(localStorage.getItem('display_name'));
 
     var userWelcome = document.getElementById('welcome_user').innerHTML
     userWelcome = 'Welcome ' + display_name;

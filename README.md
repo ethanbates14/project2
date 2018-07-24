@@ -14,6 +14,8 @@ index.html
 -- Jinja template renders channel list group
 -- Jinja nested template renders message area for each channel - default hidden
 -- Dynamic Ids and Classes based of channel name
+-- Help Modal for End User
+-- Key Features - user channel dynamic navigation
 
 index.js
 -- socket io listeners and emiters for messages and channels
@@ -29,3 +31,4 @@ index.js
 styles.css
 -- custom sytling - many classes for JS functionality (hiding and highlighting)
 -- incorporated some Google Fonts and Font Awesome
+

@@ -5,6 +5,10 @@
     color:white;
 }
 
+#chat-header {
+    border:none;
+}
+
 .greeting {
     font-family: 'Lobster', cursive;
     margin-bottom: 20px;
@@ -106,4 +110,8 @@ body, .container-fluid {
 
 .hide-item {
     display: none !important;
+}
+
+.modal-title {
+    font-family: 'Lobster', cursive;
 }
