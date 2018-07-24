@@ -9,7 +9,7 @@ socketio = SocketIO(app)
 
 # list of channels and messages per channel.  Default is General
 channel_list = ['general']
-channel_messages = {'general': [{'msg_user': 'Ethan', 'msg_message': 'Hello', 'msg_time': '7/22/2018 8:37 PM'}]}
+channel_messages = {'general': [{'msg_user': 'Chatterbox', 'msg_message': 'Hello There!', 'msg_time': '7/22/2018 8:37 PM'}]}
 """
 #Testing
 
@@ -20,6 +20,16 @@ channel_messages = {
     'two': [{'msg_user': 'Tom', 'msg_message': 'You', 'msg_time': '7/22/2018 8:37 PM'}] ,
 }
 """
+#Push Out Oldest Message Per Channel - Max 100 msg
+def max_messages(array):
+    msg_count = len(array)
+    if msg_count > 100:
+        array.pop(0)
+
+#Check if Room Exists in Dict - if not add
+def room_exists(item,target):
+    if item not in target.keys():
+        target[item] = []
 
 # Render Index Template
 @app.route("/", methods=["GET", "POST"])
@@ -35,14 +45,19 @@ def add_new_channel(chjson):
         emit('channel_alert',{'data': f"Channel '{new_channel}' Already Exists!" })
     else:
         channel_list.append(new_channel)
-        channel_messages[new_channel] = {}
+        channel_messages[new_channel] = []
         emit('display_channel',new_channel, broadcast=True)
 
 
 #Message Room Control
 @socketio.on('user_messages')
 def handle_usr_message(message):
+
+    #Check if Key Exists and Message Count, Add Mesage to Dict of Rooms
+    max_messages(message['room'])
+    #room_exists(message['room'],channel_messages)
     channel_messages[message['room']].append({'msg_user': message['user'], 'msg_message': message['msgcontent'], 'msg_time': message['timestamp'] })
+
     print(channel_messages)
     emit('msg_response', {'msg_user': message['user'], 'msg_message': message['msgcontent'], 'msg_time': message['timestamp'], 'room': message['room'] },
     broadcast=True)

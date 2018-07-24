@@ -42,7 +42,7 @@
                      </form>
                      <ul class="list-group">
                         {% for ch_item in channels %}
-                        <li class="channel-items list-group-item" id="list-{{ ch_item }}-list">
+                        <li class="channel-items list-group-item" id="list-{{ ch_item }}">
                            {{ ch_item }}
                         </li>
                         {% endfor %}
@@ -56,7 +56,7 @@
 
              <!-- channel iteration -->
             {% for ch_item in channels %}
-            <div class="row" id="list-{{ch_item}}">
+            <div class="row hide-item" id="grid-{{ch_item}}">
                <div class="col-sm-12">
 
                <div class="row">
@@ -80,10 +80,10 @@
                         <div class="form-row align-items-center">
                            <div class="col-sm-11">
                               <label class="sr-only" for="inlineFormInputName">Message</label>
-                              <input id="{{ch_item}}-myMessage" type="text" class="form-control"  autocomplete="off" placeholder="Message" disabled>
+                              <input id="{{ch_item}}-myMessage" type="text" class="form-control message-input"  autocomplete="off" placeholder="Message" disabled>
                            </div>
                            <div class="col-auto">
-                              <button id="{{ch_item}}-sendbutton" type="submit" class="btn btn-primary">Send</button>
+                              <button id="{{ch_item}}-sendbutton" type="submit" class="btn btn-primary sendbutton">Send</button>
                            </div>
                         </div>
                      </form>
